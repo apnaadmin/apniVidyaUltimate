@@ -6,8 +6,8 @@ import * as z from "zod"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { createUser } from "@/src/actions/user.action"
-import submit from "@/src/actions/submit.action"
-import ImageMediator from "./ImageMediator"
+import { useRouter,usePathname } from 'next/navigation'
+import { useEdgeStore } from "@/src/lib/edgestore"
 import {
   Form,
   FormControl,
@@ -25,7 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { changeImage } from "@/src/actions/changeImageFormat.action"
+
+
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -48,6 +49,9 @@ const formSchema = z.object({
 })
 
 export default function TeacherForm() {
+  const edgestore = useEdgeStore()
+  const router = useRouter()
+  const path = usePathname()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -61,45 +65,38 @@ export default function TeacherForm() {
          subject:"Technology", 
         },
       })
-      const onSubmit = async(data:any)=>
-      {
-        try
-        {
-         
+      const onSubmit = async (data: any) => {
+        try {
           const formData = new FormData();
           Object.keys(data).forEach((key) => {
             formData.append(key, data[key]);
           });
-
+      
           const file = (document.getElementById('picture') as HTMLInputElement)?.files?.[0];
-    
           if (file) {
-        
-            formData.append('pic', file);
-            
-            console.log(formData);
-            await submit({formData})
-          } else {
-            console.error('No file selected');
-          }  
-      //   const {name,bio,location,email,subject,experience,number,pic} = data
-      //  await createUser({
-      //   bio,
-      //   email,
-      //   experience,
-      //   location,
-      //   name,
-      //   number,
-      //   pic,
-      //   subject
-      //  })
-      }
-      catch(error)
-      {
-        console.log(error);
-      }
-          
-      }
+            const res = await edgestore.edgestore.myImages.upload({ file });
+            console.log(res.url);
+            console.log(res.thumbnailUrl);
+            const picture = await res.url;
+            const updatedData = { ...data, pic: picture };
+            const { name, bio, location, email, subject, experience, number, pic } = updatedData;
+            await createUser({
+              bio,
+              email,
+              experience,
+              location,
+              name,
+              number,
+              pic,
+              subject,
+              path
+            });
+            router.push("/")
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
  
 
   return (

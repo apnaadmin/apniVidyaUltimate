@@ -15,5 +15,6 @@ export interface CreateUserParams
    location:string
    number:string
    email:string
+   path:string
 
 }

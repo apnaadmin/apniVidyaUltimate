@@ -2,12 +2,14 @@
 import User from "../database/user.modal";
 import { connectToDatabase } from "./mongoose"
 import { CreateUserParams } from "../app";
-
+import { revalidatePath } from "next/cache";
 export async function createUser(userData:CreateUserParams)
 {
     try{
+        const {path,...newData} = userData
         connectToDatabase()
-        const newUser = await User.create(userData)
+        const newUser = await User.create(newData)
+        revalidatePath(path)
     }
     catch(error)
     {

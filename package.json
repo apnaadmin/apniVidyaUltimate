@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@edgestore/react": "^0.1.6",
+    "@edgestore/server": "^0.1.6",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.3",
@@ -19,7 +21,6 @@
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.7.0",
-    "cloudinary": "^1.41.1",
     "clsx": "^2.1.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
