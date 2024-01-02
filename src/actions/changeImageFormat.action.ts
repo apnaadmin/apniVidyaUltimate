@@ -19,7 +19,7 @@ export async function changeImage(pic:File) {
     await writeFile(path, buffer)
     console.log(`open ${path} to see the uploaded file`)
 
-    return { success: true }  
+    return file
   }
   catch(error)
   {

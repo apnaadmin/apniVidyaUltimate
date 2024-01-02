@@ -6,6 +6,7 @@ import * as z from "zod"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { createUser } from "@/src/actions/user.action"
+import ImageMediator from "./ImageMediator"
 import {
   Form,
   FormControl,
@@ -44,11 +45,6 @@ const formSchema = z.object({
     message: "Phone number cannot exceed 10 digits",
   }),
   subject: z.string(),
-
-
-
-
-  
 })
 
 export default function TeacherForm() {
@@ -62,10 +58,7 @@ export default function TeacherForm() {
          location:"Agartala",
          number:"1234567890",
          mode:"Offline",
-         subject:"Technology",
-
-         
-
+         subject:"Technology", 
         },
       })
       const onSubmit = async(data:any)=>
@@ -80,12 +73,7 @@ export default function TeacherForm() {
             await changeImage(file);
           } else {
             console.error('No file selected');
-          }
-
-          
-                 
-         
-         
+          }  
       //   const {name,bio,location,email,subject,experience,number,pic} = data
       //  await createUser({
       //   bio,
@@ -109,7 +97,7 @@ export default function TeacherForm() {
 
   return (
     <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-10">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-10" >
       <FormField
         control={form.control}
         name="name"
