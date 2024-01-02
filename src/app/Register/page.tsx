@@ -1,5 +1,5 @@
 "use client"
-
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -23,8 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
-
+import { changeImage } from "@/src/actions/changeImageFormat.action"
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -56,27 +55,49 @@ export default function TeacherForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-         name:"",
-         bio:"",
-         experience:"",
+         name:"Anurag Bhandari",
+         bio:"I am a very good guy",
+         experience:"BTech NITA",
+         email:"anuragbhandari77736@gmail.com",
+         location:"Agartala",
+         number:"1234567890",
+         mode:"Offline",
+         subject:"Technology",
+
+         
 
         },
       })
-      const onSubmit = async(data)=>
+      const onSubmit = async(data:any)=>
       {
         try
         {
-        const {name,bio,location,email,subject,experience,number,pic} = data
-       await createUser({
-        bio,
-        email,
-        experience,
-        location,
-        name,
-        number,
-        pic,
-        subject
-       })
+          console.log(data);
+
+          const file = (document.getElementById('picture') as HTMLInputElement)?.files?.[0];
+      console.log(file);
+          if (file) {
+            await changeImage(file);
+          } else {
+            console.error('No file selected');
+          }
+
+          
+                 
+         
+         
+      //   const {name,bio,location,email,subject,experience,number,pic} = data
+      //  await createUser({
+      //   bio,
+      //   email,
+      //   experience,
+      //   location,
+      //   name,
+      //   number,
+      //   pic,
+      //   subject
+      //  })
+      console.log(data);
       }
       catch(error)
       {
@@ -201,7 +222,7 @@ export default function TeacherForm() {
           <FormItem>
             <FormLabel>Profile Pic</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your email address" type="file"  {...field} />
+              <Input id="picture" placeholder="Upload the picture" type="file" {...field} />
             </FormControl>
             <FormDescription>
             Provide a profile pic under 25 kb
