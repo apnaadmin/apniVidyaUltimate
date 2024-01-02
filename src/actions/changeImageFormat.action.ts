@@ -4,8 +4,9 @@ import { join } from 'path'
 
 
 
-export async function changeImage(pic:File) {
+export async function changeImage({data}) {
   try{
+    
     const file: File | null = pic as unknown as File
     if (!file) {
       throw new Error('No file uploaded')

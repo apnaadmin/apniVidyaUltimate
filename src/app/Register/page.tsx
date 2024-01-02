@@ -6,6 +6,7 @@ import * as z from "zod"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { createUser } from "@/src/actions/user.action"
+import submit from "@/src/actions/submit.action"
 import ImageMediator from "./ImageMediator"
 import {
   Form,
@@ -35,7 +36,6 @@ const formSchema = z.object({
   experience:z.string(),
   location:z.string(),
   mode:z.string(),
-  pic:z.string(),
   email: z.string().email({
     message: "Invalid email address",
   }),
@@ -65,12 +65,20 @@ export default function TeacherForm() {
       {
         try
         {
-          console.log(data);
+         
+          const formData = new FormData();
+          Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+          });
 
           const file = (document.getElementById('picture') as HTMLInputElement)?.files?.[0];
-      console.log(file);
+    
           if (file) {
-            await changeImage(file);
+        
+            formData.append('pic', file);
+            
+            console.log(formData);
+            await submit({formData})
           } else {
             console.error('No file selected');
           }  
@@ -85,7 +93,6 @@ export default function TeacherForm() {
       //   pic,
       //   subject
       //  })
-      console.log(data);
       }
       catch(error)
       {
