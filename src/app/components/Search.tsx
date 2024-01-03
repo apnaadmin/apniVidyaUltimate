@@ -5,28 +5,27 @@ import { Input } from '@/components/ui/input';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { formUrl, removeKeysFromQuery } from '@/lib/utils';
-
+import { useTheme } from './Providers/ThemeContext';
 
 type Props = {
   route: string;
   iconPosition: string;
-  imgSrc: string;
   placeholder: string;
   otherClasses: string;
 };
 
-const LocalSearchBar = ({
+const Search = ({
   route,
   iconPosition,
-  imgSrc,
   placeholder,
   otherClasses,
 }: Props) => {
+    const {mode} = useTheme()
   
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const query = searchParams.get('q');
+  const query = searchParams.get('name');
   const [search, setSearch] = useState(query || '');
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const LocalSearchBar = ({
       if (search) {
         const newUrl = formUrl({
           params: searchParams.toString(),
-          key: 'q',
+          key: 'name',
           value: search,
         });
         router.push(newUrl, { scroll: false });
@@ -42,7 +41,7 @@ const LocalSearchBar = ({
         if (pathname === route) {
           const newUrl = removeKeysFromQuery({
             params: searchParams.toString(),
-            keysToRemove: ['q'],
+            keysToRemove: ['name'],
           });
           router.push(newUrl, { scroll: false });
         }
@@ -55,7 +54,7 @@ const LocalSearchBar = ({
   return (
     <>
       <div
-        className={`flex flex-grow items-center border rounded-md p-2 gap-x-6 ${
+        className={`flex flex-grow items-center border rounded-md p-2 gap-x-6 z-30 ${
           iconPosition === 'left' ? 'pl-2 pr-4' : 'pl-4 pr-2'
         } ${otherClasses}`}
         style={{ width: '300px' }} 
@@ -92,4 +91,4 @@ const LocalSearchBar = ({
   );
 };
 
-export default LocalSearchBar;
+export default Search;

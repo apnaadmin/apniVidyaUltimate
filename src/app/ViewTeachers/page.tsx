@@ -10,14 +10,20 @@ import {
 } from "@/components/ui/card"
 import { getAllUsers } from '@/src/actions/user.action'
 import { Button } from '@/components/ui/button'
-const page = async() => {
+import Search from '../components/Search'
+import { useSearchParams,useRouter,usePathname } from 'next/navigation'
+const page = async({searchParams}:any) => {
     try{
-    const result = await getAllUsers()
+  
+    const result = await getAllUsers({
+      searchQuery: searchParams.name,
+    })
     console.log(result);
     return (
       <>
+      <Search iconPosition='left' otherClasses=''  placeholder='Enter name' route='/ViewTeachers'/>
         {result.map((item, index) => (
-          <div key={item._id.$oid} className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg hover:shadow-xl transition duration-300 mb-4">
+          <div key={item._id} className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg hover:shadow-xl transition duration-300 mb-4">
             <div className="relative">
               <Image
                 src={item.pic}
