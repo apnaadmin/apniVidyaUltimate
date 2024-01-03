@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button"
 import { createUser } from "@/src/actions/user.action"
 import { useRouter,usePathname } from 'next/navigation'
 import { useEdgeStore } from "@/src/lib/edgestore"
+import MakePaymentComponent from '@/src/app/components/MakePayment'
+import Script from "next/script"
+
 import {
   Form,
   FormControl,
@@ -49,6 +52,7 @@ const formSchema = z.object({
 })
 
 export default function TeacherForm() {
+
   const edgestore = useEdgeStore()
   const router = useRouter()
   const path = usePathname()
@@ -65,6 +69,65 @@ export default function TeacherForm() {
          subject:"Technology", 
         },
       })
+      const makePayment = async () => {
+        try {
+          const key = process.env.RAZORPAY_API_KEY;
+          const secret = process.env.RAZORPAY_API_SECRET;
+          const data = await fetch("http://localhost:3000/api/razorpay");
+          const { order } = await data.json();
+          console.log(order);
+          const options = {
+            key: key,
+            name: "apniVidya",
+            currency:order.currency,
+            amount:order.amount,
+            order_id:order.id,
+            description: "Understanding RazorPay Integration",
+            // image: logoBase64,
+            handler: async function (response: any) {
+              console.log(response);
+      
+              const data = await fetch("http://localhost:3000/api/paymentverify", {
+                method: "POST",
+                // headers: {
+                //   Authorization: 'YOUR_AUTH_HERE'
+                // },
+                body: JSON.stringify({
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_signature: response.razorpay_signature,
+                }),
+              });
+      
+              const res = await data.json();
+      
+              console.log("response verify==", res);
+      
+              if (res?.message == "success") {
+                console.log("ok");
+              }},
+
+              prefill: {
+                name: "apnividya",
+                email: "apni@gmail.com",
+                contact: "000000000",
+              },
+
+              
+            
+          };
+          const paymentObject = new window.Razorpay(options);
+          paymentObject.open();
+      
+          paymentObject.on("payment.failed", function (response:any) {
+            alert("Payment failed. Please try again. Contact support for help");
+          });
+          
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      
       const onSubmit = async (data: any) => {
         try {
           const formData = new FormData();
@@ -100,6 +163,7 @@ export default function TeacherForm() {
  
 
   return (
+    <>
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-10" >
       <FormField
@@ -306,7 +370,12 @@ export default function TeacherForm() {
         />
 
       <Button type="submit">Submit</Button>
+      
     </form>
   </Form>
+  <button className="z-50" onClick={makePayment}>Make payment</button>
+ 
+
+  </>
   )
 }

@@ -21,7 +21,7 @@ const page = async({searchParams}:any) => {
     console.log(result);
     return (
       <>
-      <Search iconPosition='left' otherClasses=''  placeholder='Enter name' route='/ViewTeachers'/>
+      <Search iconPosition='left' otherClasses=''  placeholder='Enter anything' route='/ViewTeachers'/>
         {result.map((item, index) => (
           <div key={item._id} className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg hover:shadow-xl transition duration-300 mb-4">
             <div className="relative">
