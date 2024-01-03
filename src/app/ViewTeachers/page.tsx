@@ -17,16 +17,15 @@ const page = async() => {
     return (
       <>
         {result.map((item, index) => (
-          <div key={item._id.$oid} className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg hover:shadow-xl transition duration-300 mb-4 ">
+          <div key={item._id.$oid} className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg hover:shadow-xl transition duration-300 mb-4">
             <div className="relative">
-            <Image
-              src={item.pic}
-              alt={item.name}
-              width={100}
-              height={100}
-              className=""
-             
-            />
+              <Image
+                src={item.pic}
+                alt={item.name}
+                width={500}
+                height={500}
+                className=""
+              />
             </div>
             <div className="px-6 py-4">
               <h2 className="text-3xl font-bold mb-2 text-gray-800">{item.name}</h2>
@@ -58,6 +57,7 @@ const page = async() => {
         ))}
       </>
     );
+    
     }
     catch(error)
     {
