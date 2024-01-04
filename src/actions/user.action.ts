@@ -33,7 +33,8 @@ export async function getAllUsers({searchQuery}:any) {
         }
       
         const users = await User.find(query)
-    
+        
+      revalidatePath("/ViewTeachers")
         return users;
     } 
     catch (error) {

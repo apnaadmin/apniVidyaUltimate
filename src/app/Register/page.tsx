@@ -10,7 +10,7 @@ import { useRouter,usePathname } from 'next/navigation'
 import { useEdgeStore } from "@/src/lib/edgestore"
 import MakePaymentComponent from '@/src/app/components/MakePayment'
 import Script from "next/script"
-
+import {Loader} from '@/src/app/components/Loader'
 import {
   Form,
   FormControl,
@@ -53,6 +53,10 @@ const formSchema = z.object({
 
 export default function TeacherForm() {
 
+  const [isAuthentic, setIsAuthentic] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  
   const edgestore = useEdgeStore()
   const router = useRouter()
   const path = usePathname()
@@ -72,9 +76,11 @@ export default function TeacherForm() {
       const makePayment = async () => {
         try {
           const key = process.env.RAZORPAY_API_KEY;
+          console.log(key);
           const secret = process.env.RAZORPAY_API_SECRET;
           const data = await fetch("http://localhost:3000/api/razorpay");
           const { order } = await data.json();
+          console.log(key);
           console.log(order);
           const options = {
             key: key,
@@ -104,6 +110,7 @@ export default function TeacherForm() {
               console.log("response verify==", res);
       
               if (res?.message == "success") {
+                setIsAuthentic(true)
                 console.log("ok");
               }},
 
@@ -130,6 +137,7 @@ export default function TeacherForm() {
       
       const onSubmit = async (data: any) => {
         try {
+        setIsLoading(true)
           const formData = new FormData();
           Object.keys(data).forEach((key) => {
             formData.append(key, data[key]);
@@ -154,16 +162,23 @@ export default function TeacherForm() {
               subject,
               path
             });
-            router.push("/")
+            router.push("/ViewTeachers")
           }
         } catch (error) {
           console.error(error);
         }
+        finally
+        {
+          setIsLoading(false)
+        }
       };
- 
 
+
+      
   return (
     <>
+    
+
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-10" >
       <FormField
@@ -368,8 +383,9 @@ export default function TeacherForm() {
             </FormItem>
           )}
         />
+{isLoading && <Loader />}
+<Button disabled={isLoading || isAuthentic} type="submit">Register</Button>
 
-      <Button type="submit">Submit</Button>
       
     </form>
   </Form>
@@ -378,4 +394,5 @@ export default function TeacherForm() {
 
   </>
   )
+          
 }
