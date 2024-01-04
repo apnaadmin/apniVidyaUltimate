@@ -9,10 +9,9 @@ interface NavigationItem {
 
 const navigation: NavigationItem[] = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Courses', href: '#courses', current: false },
-  { name: 'Mentor', href: '#mentor', current: false },
-  { name: 'Group', href: '#/', current: false },
-  { name: 'Testimonial', href: '#testimonial', current: false },
+  { name: 'Register', href: '/Register', current: false },
+  { name: 'ViewTeachers', href: '/ViewTeachers', current: false },
+  
 ]
 
 function classNames(...classes: string[]) {
@@ -30,8 +29,8 @@ const Data = () => {
                 key={item.name}
                 href={item.href}
                 className={classNames(
-                  item.current ? 'text-black hover:opacity-100' : 'hover:text-black hover:opacity-100',
-                  'py-1 text-lg font-normal opacity-75 block'
+                  item.current ? 'text-black hover:text-bold' : 'hover:text-black hover:opacity-100',
+                  'py-1 text-lg font-normal opacity-75 block dark:text-black'
                 )}
                 aria-current={item.current ? 'page' : undefined}
               >
@@ -39,12 +38,7 @@ const Data = () => {
               </Link>
             ))}
             <div className="mt-4"></div>
-            <button className="bg-white w-full text-Blueviolet border border-semiblueviolet font-medium py-2 px-4 rounded">
-              Log In
-            </button>
-            <button className="bg-semiblueviolet w-full hover:bg-Blueviolet hover:text-white text-Blueviolet font-medium my-2 py-2 px-4 rounded">
-              Sign up
-            </button>
+           
           </div>
         </div>
       </div>

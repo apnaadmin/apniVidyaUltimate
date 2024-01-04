@@ -6,6 +6,7 @@ import Drawer from "./Drawer";
 import Drawerdata from "./Drawerdata";
 import Signdialog from "./Signdialog";
 import Registerdialog from "./Registerdialog";
+import Image from 'next/image';
 import Theme from '../Theme';
 interface NavigationItem {
     name: string;
@@ -14,28 +15,39 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-    { name: 'Home', href: '#/', current: true },
-    { name: 'Courses', href: '#courses', current: false },
-    { name: 'Mentor', href: '#mentor', current: false },
-    { name: 'Register', href: '/Register', current: false },
-    { name: 'Testimonial', href: '#testimonial', current: false },
+    { name: 'Home', href: '/', current: true },
+    // { name: 'Courses', href: '#courses', current: false },
+    { name: 'ViewTeachers', href: '/ViewTeachers', current: false },
+    { name: 'Register', href:'/Register', current: false },
+    // { name: 'Testimonial', href: '#testimonial', current: false },
 ];
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
 }
-
 const CustomLink = ({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) => {
-    return (
-        <Link href={href} passHref>
-            <span
-                onClick={onClick}
-                className="px-3 py-4 text-lg font-normal"
-            >
+    // Check if the link is an anchor link (starts with '#') or an external link
+    const isInternalLink = href.startsWith('/') || href.startsWith('#');
+
+    if (isInternalLink) {
+        return (
+            <Link href={href} passHref>
+                <span
+                    onClick={onClick}
+                    className="px-3 py-4 text-lg font-normal cursor-pointer"
+                >
+                    {children}
+                </span>
+            </Link>
+        );
+    } else {
+        // External link, use a regular anchor tag
+        return (
+            <a href={href} target="_blank" rel="noopener noreferrer" className="px-3 py-4 text-lg font-normal cursor-pointer">
                 {children}
-            </span>
-        </Link>
-    );
+            </a>
+        );
+    }
 };
 
 
@@ -59,7 +71,7 @@ const Navbar = () => {
 
                             <div className="flex items-center">
                                 
-                              <img src="/_next/image?url=%2Fassets%2Fapnividyalogo2.png&w=256&q=100"></img>
+                              <Image src="/_next/image?url=%2Fassets%2Fapnividyalogo2.png&w=256&q=100" alt="ApniVisdya" height={150} width={300}/>
                             </div>
 
                             {/* LINKS */}

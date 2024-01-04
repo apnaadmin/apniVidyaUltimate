@@ -52,43 +52,59 @@ const Search = ({
   }, [search, route, pathname, router, searchParams, query]);
 
   return (
-    <>
+
+
+   
       <div
-        className={`flex flex-grow items-center border rounded-md p-2 gap-x-6 z-30 ${
-          iconPosition === 'left' ? 'pl-2 pr-4' : 'pl-4 pr-2'
+        className={`relative flex items-center border rounded-md px-4 py-2 mb-10 ${
+          mode === 'light' ? 'bg-white' : 'bg-gray-800'
         } ${otherClasses}`}
-        style={{ width: '300px' }} 
+        style={{ width: '300px' }}
       >
         {iconPosition === 'left' && (
-          <Image
-            src={mode === 'light' ? '/search.svg' : '/search-white.png'}
-            alt="Search icon"
-            width={20}
-            height={20}
-            className="cursor-pointer dark:text-white"
-          />
+          <div className="mr-2">
+            <Image
+              src={mode === 'light' ? '/search.svg' : '/search-white.png'}
+              alt="Search icon"
+              width={20}
+              height={20}
+              className="cursor-pointer dark:text-white dark:bg-black"
+            />
+          </div>
         )}
-
-        <Input
-          type="text"
-          className="flex-grow border-none outline-none text-sm text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-300 "
-          placeholder={placeholder}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
-        {iconPosition === 'right' && (
-          <Image
-            src="/search.svg"
-            alt="Search icon"
-            width={20}
-            height={20}
-            className="cursor-pointer"
+  
+        <div className="relative flex items-center w-full">
+          <input
+            type="text"
+            className="flex-grow border-none outline-none text-sm text-black dark:text-black placeholder-gray-400 dark:placeholder-gray-300 p-2 rounded-md focus:ring focus:ring-blue-300 transition-all duration-300"
+            placeholder={placeholder}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+            <button
+              type="submit"
+              className="p-2 focus:outline-none focus:ring focus:ring-blue-300 transition-all duration-300 rounded-full bg-blue-500 hover:bg-blue-600"
+            >
+              <Image src={'/assets/banner/search.svg'} alt="inputicon" width={20} height={20} />
+            </button>
+          </div>
+        </div>
+  
+        {iconPosition === 'right' && (
+          <div className="ml-2">
+            <Image
+              src="/search.svg"
+              alt="Search icon"
+              width={20}
+              height={20}
+              className="cursor-pointer"
+            />
+          </div>
         )}
       </div>
-    </>
-  );
+    );
+  
 };
 
 export default Search;
