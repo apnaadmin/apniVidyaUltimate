@@ -63,14 +63,14 @@ export default function TeacherForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-         name:"Anurag Bhandari",
-         bio:"I am a very good guy",
-         experience:"BTech NITA",
-         email:"anuragbhandari77736@gmail.com",
-         location:"Agartala",
-         number:"1234567890",
-         mode:"Offline",
-         subject:"Technology", 
+         name:"",
+         bio:"",
+         experience:"",
+         email:"",
+         location:"",
+         number:"",
+         mode:"",
+         subject:"", 
         },
       })
       const makePayment = async () => {
@@ -206,7 +206,7 @@ export default function TeacherForm() {
             <FormLabel>Bio</FormLabel>
             <FormControl>
             <Textarea
-                  placeholder=" Write a SEO-friendly description along with your name, qualification, class, subject, experience, location, mode of teaching, etc."
+                  placeholder=" Write what you want students to see"
                   className="resize-none"
                   {...field}
                 />
@@ -337,7 +337,7 @@ export default function TeacherForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
+                    <SelectValue placeholder="Select the subject you are interested in teaching" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -349,28 +349,21 @@ export default function TeacherForm() {
 <SelectItem value="Physical Education">Physical Education</SelectItem>
 <SelectItem value="Arts">Arts</SelectItem>
 <SelectItem value="Computer Science">Computer Science</SelectItem>
-<SelectItem value="Technology">Technology</SelectItem>
 <SelectItem value="Home Economics / Family and Consumer Sciences">Home Economics / Family and Consumer Sciences</SelectItem>
-<SelectItem value="Career and Technical Education (CTE)">Career and Technical Education (CTE)</SelectItem>
 <SelectItem value="Philosophy / Ethics">Philosophy / Ethics</SelectItem>
 <SelectItem value="Psychology">Psychology</SelectItem>
 <SelectItem value="Physical Sciences">Physical Sciences</SelectItem>
 <SelectItem value="Health Education">Health Education</SelectItem>
 <SelectItem value="Special Education">Special Education</SelectItem>
-<SelectItem value="Library / Information Literacy">Library / Information Literacy</SelectItem>
-<SelectItem value="Religious Studies / Theology">Religious Studies / Theology</SelectItem>
-<SelectItem value="Critical Thinking / Logic">Critical Thinking / Logic</SelectItem>
 <SelectItem value="Counseling / Guidance">Counseling / Guidance</SelectItem>
 <SelectItem value="Business Education">Business Education</SelectItem>
 <SelectItem value="Media Studies / Communication">Media Studies / Communication</SelectItem>
 <SelectItem value="Agricultural Science">Agricultural Science</SelectItem>
-<SelectItem value="Military Science (ROTC)">Military Science (ROTC)</SelectItem>
 <SelectItem value="Legal Studies">Legal Studies</SelectItem>
 <SelectItem value="Environmental Studies">Environmental Studies</SelectItem>
-<SelectItem value="Gender Studies">Gender Studies</SelectItem>
 <SelectItem value="Cultural Studies">Cultural Studies</SelectItem>
 <SelectItem value="Humanities">Humanities</SelectItem>
-<SelectItem value="Electives">Electives</SelectItem>
+
 
 
                 </SelectContent>
@@ -384,12 +377,14 @@ export default function TeacherForm() {
           )}
         />
 {isLoading && <Loader />}
-<Button disabled={isLoading || !isAuthentic} type="submit">Register</Button>
+<p className="font-bold text-black dark:text-white">Please make sure you didn't left any field empty before paying the fee</p>
+<Button className="z-50 bg-yellow-500 ml-2 mr-6 " type="button" onClick={makePayment}>Pay Rs.49--> </Button>
+<Button disabled={isLoading || !isAuthentic} type="submit" className="bg-red-500">Register</Button>
 
       
     </form>
   </Form>
-  <button className="z-50" onClick={makePayment}>Make payment</button>
+ 
  
 
   </>
