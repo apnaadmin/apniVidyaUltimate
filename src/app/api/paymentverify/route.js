@@ -4,7 +4,7 @@ import shortid from "shortid";
 import crypto from "crypto";
 const instance = new Razorpay({
     key_id: process.env.RAZORPAY_API_KEY,
-    key_secret: process.env.RAZORPAY_APT_SECRET,
+    key_secret: process.env.RAZORPAY_API_SECRET,
   });
 
 export async function POST(req,res) {
@@ -15,7 +15,7 @@ export async function POST(req,res) {
 console.log("id==",body)
 
  const expectedSignature = crypto
-   .createHmac("sha256", process.env.RAZORPAY_APT_SECRET)
+   .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
    .update(body.toString())
    .digest("hex");
 

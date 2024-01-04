@@ -75,20 +75,20 @@ export default function TeacherForm() {
       })
       const makePayment = async () => {
         try {
-          const key = process.env.RAZORPAY_API_KEY;
+          const key = process.env.RAZORPAY_API_KEY
           console.log(key);
           const secret = process.env.RAZORPAY_API_SECRET;
           const data = await fetch("http://localhost:3000/api/razorpay");
           const { order } = await data.json();
           console.log(key);
-          console.log(order);
+        
           const options = {
             key: key,
             name: "apniVidya",
             currency:order.currency,
             amount:order.amount,
             order_id:order.id,
-            description: "Understanding RazorPay Integration",
+            description: "You will be listed on our",
             // image: logoBase64,
             handler: async function (response: any) {
               console.log(response);
@@ -384,7 +384,7 @@ export default function TeacherForm() {
           )}
         />
 {isLoading && <Loader />}
-<Button disabled={isLoading || isAuthentic} type="submit">Register</Button>
+<Button disabled={isLoading || !isAuthentic} type="submit">Register</Button>
 
       
     </form>
