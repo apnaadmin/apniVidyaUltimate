@@ -1,17 +1,11 @@
 import React from 'react'
-import Image from 'next/image'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+
+import {Card, CardHeader, CardBody, CardFooter, Image, Button} from "@nextui-org/react";
 import { getAllUsers } from '@/src/actions/user.action'
-import { Button } from '@/components/ui/button'
+
 import Search from '../components/Search'
 import { useSearchParams,useRouter,usePathname } from 'next/navigation'
+import MaxWidthWrapper from '../components/MaxWidthWrapper';
 const page = async({searchParams}:any) => {
     try{
   
@@ -21,47 +15,45 @@ const page = async({searchParams}:any) => {
     console.log(result);
     return (
       <>
-      <Search iconPosition='left' otherClasses=''  placeholder='Enter anything' route='/ViewTeachers'/>
-        {result.map((item, index) => (
-          <div key={item._id} className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg hover:shadow-xl transition duration-300 mb-4">
-            <div className="relative">
-              <Image
-                src={item.pic}
-                alt={item.name}
-                width={500}
-                height={500}
-                className=""
-              />
-            </div>
-            <div className="px-6 py-4">
-              <h2 className="text-3xl font-bold mb-2 text-gray-800">{item.name}</h2>
-              <p className="text-gray-600 text-base">{item.bio}</p>
-            </div>
-            <div className="px-6 py-2">
-              <p className="text-gray-700 text-sm">
-                <span className="font-semibold">Email:</span> {item.email}
-              </p>
-              <p className="text-gray-700 text-sm">
-                <span className="font-semibold">Experience:</span> {item.experience}
-              </p>
-              <p className="text-gray-700 text-sm">
-                <span className="font-semibold">Subject:</span> {item.subject}
-              </p>
-              <p className="text-gray-700 text-sm">
-                <span className="font-semibold">Location:</span> {item.location}
-              </p>
-              <p className="text-gray-700 text-sm">
-                <span className="font-semibold">Contact:</span> {item.number}
-              </p>
-            </div>
-            <div className="px-6 py-4">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none">
-                View Details
-              </button>
-            </div>
-          </div>
-        ))}
+      
+       
+          <>
+            {result.map((item, index) => (
+              <>
+              <MaxWidthWrapper>
+              <div key={index}>
+                 <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8">
+      <Card isFooterBlurred className="w-full h-[300px] col-span-12 sm:col-span-5">
+      <CardHeader className="absolute z-10 top-1 flex-col items-start">
+       
+      </CardHeader>
+      <Image
+        removeWrapper
+        alt="Card example background"
+        className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+        src="https://files.edgestore.dev/xv88212va5vg843u/myImages/_public/151d9b78-01ee-47ff-b2f1-b5553ac6d271.jpg"
+      />
+      <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+        <div>
+          <p className="text-black text-tiny">Available soon.</p>
+          <p className="text-black text-tiny">Get notified.</p>
+        </div>
+        <Button className="text-tiny" color="primary" radius="full" size="sm">
+          Notify Me
+        </Button>
+      </CardFooter>
+    </Card>
+  </div>
+              </div>
+              </MaxWidthWrapper>
+              </>
+            ))}
+          </>
+        );
+     
+       
       </>
+      
     );
     
     }
