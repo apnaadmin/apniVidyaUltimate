@@ -1,7 +1,6 @@
 "use client"
 import React from 'react';
 import Image from 'next/image';
-import { Input } from '@/components/ui/input';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { formUrl, removeKeysFromQuery } from '@/lib/utils';
