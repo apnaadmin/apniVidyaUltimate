@@ -3,8 +3,8 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import { Textarea } from "shad/textarea"
+import { Button } from "shad/button"
 import { createUser } from "@/src/actions/user.action"
 import { useRouter,usePathname } from 'next/navigation'
 import { useEdgeStore } from "@/src/lib/edgestore"
@@ -19,15 +19,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "shad/form"
+import { Input } from "shad/input"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "shad/select"
 
 
 const formSchema = z.object({

@@ -9,7 +9,7 @@ type ThemeContextType = {
 // Provide a default context value to avoid runtime errors
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = useState('dark');
+  const [mode, setMode] = useState('light');
   useEffect(() => {
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     console.log(prefersDarkMode);

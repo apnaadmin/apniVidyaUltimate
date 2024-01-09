@@ -18,7 +18,7 @@ export async function createUser(userData:CreateUserParams)
         console.log(error);
     }
 }
-export async function getAllUsers({searchQuery}:any) {
+export async function getAllUsers({searchQuery,stateQuery}:any) {
     try {
         connectToDatabase();
         const query:FilterQuery<typeof User> = {}
@@ -31,6 +31,10 @@ export async function getAllUsers({searchQuery}:any) {
                 {location:{$regex:new RegExp(searchQuery,"i")}},
             ]
         }
+        if(stateQuery){
+            query.state = { $regex: new RegExp(stateQuery, "i") };
+        }
+
       
         const users = await User.find(query)
         

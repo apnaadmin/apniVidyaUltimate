@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 interface Props
 {
     className?:string
@@ -9,9 +10,11 @@ interface Props
 const MaxWidthWrapper = ({className,children}:Props) =>
 {
     return(
+       
     <div className={cn('mx-auto w-full max-w-scren-xl px-2.5 md:px-20',className)}>
     {children}
     </div>
+  
     )
 }
 export default MaxWidthWrapper

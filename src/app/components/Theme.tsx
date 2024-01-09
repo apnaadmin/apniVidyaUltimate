@@ -10,7 +10,7 @@ import {
     MenubarSeparator,
     MenubarShortcut,
     MenubarTrigger,
-  } from "@/components/ui/menubar";
+  } from "shad/menubar";
 
 const Theme = ()=>
 {

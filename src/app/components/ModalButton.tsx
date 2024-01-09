@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "shad/dialog";
+import { Input } from "shad/input";
+import { Label } from "shad/label";
 import { Button } from '@nextui-org/react';
 
 const ModalButton = ({name,bio,email,number,location}:any) => {
