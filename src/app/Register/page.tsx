@@ -81,7 +81,7 @@ export default function TeacherForm() {
           const key = process.env.RAZORPAY_API_KEY
           console.log(key);
           const secret = process.env.RAZORPAY_API_SECRET;
-          const data = await fetch("http://localhost:3000/api/razorpay");
+          const data = await fetch(`${route}/api/razorpay`);
           const { order } = await data.json();
           console.log(key);
         
@@ -95,8 +95,8 @@ export default function TeacherForm() {
             // image: logoBase64,
             handler: async function (response: any) {
               console.log(response);
-      
-              const data = await fetch("http://localhost:3000/api/paymentverify", {
+              
+              const data = await fetch(`${route}/api/paymentverify`, {
                 method: "POST",
                 // headers: {
                 //   Authorization: 'YOUR_AUTH_HERE'

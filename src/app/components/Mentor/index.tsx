@@ -122,7 +122,7 @@ export default class MultipleItems extends Component {
                     <h2 className="lh-82 text-midnightblue text-4xl md:text-55xl text-center md:text-start font-semibold">Service We <br /> Provide:</h2>
 
                     <Slider {...settings}>
-                        {postData.map((items, i) => (
+                        {postData.map((items:any, i:any) => (
                             <div key={i}>
                                 <div className='m-10 py-18 md:my-16 text-center'>
                                     <div className="relative">
