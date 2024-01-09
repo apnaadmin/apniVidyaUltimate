@@ -40,6 +40,7 @@ const formSchema = z.object({
   experience:z.string(),
   location:z.string(),
   mode:z.string(),
+  state:z.string(),
   email: z.string().email({
     message: "Invalid email address",
   }),
@@ -71,6 +72,7 @@ export default function TeacherForm() {
          number:"",
          mode:"",
          subject:"", 
+         state:"",
         },
       })
       const makePayment = async () => {
@@ -322,6 +324,32 @@ export default function TeacherForm() {
               </Select>
               <FormDescription>
               Select the subjects that you want to teach 
+               
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
+          control={form.control}
+          name="state"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select your state of choice</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your state" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Tripura">Tripura</SelectItem>
+                  <SelectItem value="West Bengal">West Bengal</SelectItem>
+                 
+                </SelectContent>
+              </Select>
+              <FormDescription>
+              Select your state of preference
                
               </FormDescription>
               <FormMessage />

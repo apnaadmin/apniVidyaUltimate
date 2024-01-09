@@ -1,59 +1,116 @@
 import React from 'react'
-
-import {Card, CardHeader, CardBody, CardFooter, Image, Button} from "@nextui-org/react";
+import Image from 'next/image'
+import { MapPin,Brain,Microscope} from 'lucide-react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { getAllUsers } from '@/src/actions/user.action'
-
+import { Button } from '@nextui-org/react'
 import Search from '../components/Search'
 import { useSearchParams,useRouter,usePathname } from 'next/navigation'
-import MaxWidthWrapper from '../components/MaxWidthWrapper';
+import ModalButton from '../components/ModalButton'
+import MaxWidthWrapper from '../components/MaxWidthWrapper'
 const page = async({searchParams}:any) => {
     try{
   
     const result = await getAllUsers({
       searchQuery: searchParams.name,
     })
-    console.log(result);
+   
+   
+    
     return (
       <>
-      
-       
-          <>
-            {result.map((item, index) => (
-              <>
-              <MaxWidthWrapper>
-              <div key={index}>
-                 <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8">
-      <Card isFooterBlurred className="w-full h-[300px] col-span-12 sm:col-span-5">
-      <CardHeader className="absolute z-10 top-1 flex-col items-start">
-       
-      </CardHeader>
-      <Image
-        removeWrapper
-        alt="Card example background"
-        className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-        src="https://files.edgestore.dev/xv88212va5vg843u/myImages/_public/151d9b78-01ee-47ff-b2f1-b5553ac6d271.jpg"
-      />
-      <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-        <div>
-          <p className="text-black text-tiny">Available soon.</p>
-          <p className="text-black text-tiny">Get notified.</p>
-        </div>
-        <Button className="text-tiny" color="primary" radius="full" size="sm">
-          Notify Me
-        </Button>
-      </CardFooter>
-    </Card>
-  </div>
+       <MaxWidthWrapper>
+      <Search
+  iconPosition='left'
+  otherClasses='flex items-center justify-center mb-8'  // Adjust the mb (margin-bottom) value as needed
+  placeholder='Enter anything'
+  route='/ViewTeachers'
+/>
+
+      {result.map((item, i) => (
+  <div key={i}>
+   
+
+      <div className='bg-white m-3 px-3 pt-3 pb-12 my-20 shadow-courses rounded-2xl sm:grid sm:grid-cols-2 dark:bg-gray-300 '>
+          <div className="relative rounded-3xl">
+              <Image src={item.pic} alt="gaby" width={389} height={262} className=" mt-3 border-2 rounded-lg border-gray-500 dark:bg-gray-600  "  />
+          
+              <div className="absolute right-5 -bottom-2 bg-ultramarine rounded-full p-6">
+               
               </div>
-              </MaxWidthWrapper>
-              </>
-            ))}
-          </>
-        );
-     
-       
-      </>
+          </div>
+
+          <div className="px-3">
+              <h4 className='text-2xl font-semibold pt-6 text-gray-700'>{item.name},</h4>
+              <h4 className='text-lg  pt-1 text-gray-500'>{item.experience}</h4>
+              
+            
+           
+           
+              <hr style={{ color: "#C4C4C4" }} />
+              <div className='grid grid-cols-1 gap-2 ml-3'>
+              <div className="flex justify-between pt-6">
+                  <div className="flex gap-4">
+                      <Image src={'/assets/courses/book-open.svg'} alt="users" width={24} height={24} className="inline-block m-auto" />
+                      <h3 className="text-base font-medium text-black opacity-75"><span className='text-blue-600 font-semibold'>Subject:</span>{item.subject}</h3>
+                  </div>
+                  
+                  
+               
+              </div>
+              <div className="flex justify-between pt-6">
+                 
+                  <div className="flex gap-4">
+                      <Image src={'/assets/courses/users.svg'} alt="users" width={24} height={24} className="inline-block m-auto" />
+                      <h3 className="text-base font-medium text-black opacity-75"><span className='text-blue-600 font-semibold'>Mode:</span>
+                      {item.mode ? item.mode : "Offline"}
+</h3>
+                  </div>
+                  
+               
+              </div>
+              <div className="flex justify-between pt-6">
+                 
+                 <div className="flex gap-4">
+                     {/* <Image src={'/assets/courses/users.svg'} alt="users" width={24} height={24} className="inline-block m-auto" /> */}
+                     <MapPin className="inline-block m-auto " />
+                     <h3 className="text-base font-medium text-black opacity-75"> <span className='text-blue-600 font-semibold'>Location:</span>{item.location}</h3>
+                 </div>
+                 
+              
+             </div>
+                <div className="flex justify-between pt-6">
+                  <div className="flex gap-4">
+                      <Image src={'/assets/courses/book-open.svg'} alt="users" width={24} height={24} className="inline-block m-auto" />
+                      <h3 className="text-base font-medium text-black opacity-75"><span className='text-blue-600 font-semibold'>Contact:</span>{item.number}</h3>
+                  </div>
+                 
+                  
+               
+              </div>
+              <div className='flex flex-col items-center justify-center mt-20'>
+               <ModalButton name={item.name} bio={item.bio} email={item.email} number={item.number} location={item.location}/>
+              </div>
+              </div>
+
       
+          </div>
+        
+      </div>
+      
+  </div>
+
+
+))}
+</MaxWidthWrapper>
+      </>
     );
     
     }
@@ -67,3 +124,13 @@ const page = async({searchParams}:any) => {
 }
 
 export default page
+
+
+
+
+// Bhavna Debnath
+
+// 12+ 2nd Year, Fresher
+// Subject: English
+// Mode: Offline
+// Location: East Jogendranagar Datta para
