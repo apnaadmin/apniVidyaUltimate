@@ -15,7 +15,7 @@ interface DataType {
 
 }
 
-const postData: DataType[] = [
+const postData: any = [
     {
         profession: 'A+ Communication Skills',
         profession2: 'Min 1+ year experience',

@@ -14,7 +14,7 @@ interface socialLinks {
 }
 
 
-const products: ProductType[] = [
+const products: any = [
     {
         id: 1,
         section: "Company",

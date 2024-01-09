@@ -120,7 +120,7 @@ export default class MultipleItems extends Component {
 
 
                     <Slider {...settings}>
-                        {postData.map((items, i) => (
+                        {postData.map((items:any, i:any) => (
                             <div key={i}>
 
                                 <div className='bg-white m-3 px-3 pt-3 pb-12 my-20 shadow-courses rounded-2xl'>
