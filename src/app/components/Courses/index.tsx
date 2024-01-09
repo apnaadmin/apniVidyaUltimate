@@ -18,7 +18,7 @@ interface DataType {
     rating: number;
 }
 
-const postData: DataType[] = [
+const postData: any = [
     {
         heading: 'IIT',
         heading2: 'Mains and Advanced',
