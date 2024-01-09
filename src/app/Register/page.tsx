@@ -50,6 +50,7 @@ const formSchema = z.object({
     message: "Phone number cannot exceed 10 digits",
   }),
   subject: z.string(),
+  pic:z.string(),
 })
 
 export default function TeacherForm() {
