@@ -54,7 +54,7 @@ const page = async({searchParams}:any) => {
 
       <div className='bg-white m-3 px-3 pt-3 pb-2 my-20 shadow-courses rounded-2xl sm:grid sm:grid-cols-2 dark:bg-gray-300 '>
           <div className="relative rounded-3xl">
-              <Image src="https://nextui.org/images/hero-card.jpeg" alt="gaby" width={238} height={12} className=" mt-3 border-2 rounded-lg border-gray-500 dark:bg-gray-600  "  />
+              <Image src="https://nextui.org/images/hero-card.jpeg" alt="gaby" width={238} height={12} className=" mt-3 border-2 rounded-lg border-gray-500 dark:bg- "  />
           
               <div className="absolute right-5 -bottom-2 bg-ultramarine rounded-full p-6">
                

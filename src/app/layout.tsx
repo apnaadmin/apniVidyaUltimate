@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
         <head />
         
-        <body className={`flex flex-col items-center justify-center bg-gray-300 dark:bg-black `} >
+        <body className={`flex flex-col items-center justify-center bg-white dark:bg-black `} >
         <Providers>
           <EdgeStoreProvider>
           <ThemeProvider
