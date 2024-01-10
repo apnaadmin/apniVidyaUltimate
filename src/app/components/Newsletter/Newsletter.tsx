@@ -17,7 +17,7 @@ const Newsletter = () => {
                             </h3>
 
                             <div>
-                            <h2 className="py-6 lg:py-5 text-sm md:text-lg w-full mx-1 text-black rounded-full pl-1 focus:outline-none focus:text-black bg-white text-center"><div class="flex items-center justify-center"><div class="bg-black rounded-full p-2 mr-2"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="text-white text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>Email us at support@apnividya.in</div></h2>
+                            <h2 className="py-6 lg:py-5 text-sm md:text-lg w-full mx-1 text-black rounded-full pl-1 focus:outline-none focus:text-black bg-white text-center"><div className="flex items-center justify-center"><div className="bg-black rounded-full p-2 mr-2"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" className="text-white text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>Email us at support@apnividya.in</div></h2>
                             </div>
                         </div>
                     </div>
