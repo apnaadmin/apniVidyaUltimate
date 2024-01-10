@@ -9,9 +9,8 @@ interface NavigationItem {
 
 const navigation: NavigationItem[] = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Register', href: '/Register', current: false },
-  { name: 'ViewTeachers', href: '/ViewTeachers', current: false },
-  
+    { name: 'Register', href: '/Register', current: false },
+    { name: 'ViewTeachers', href: '/ViewTeachers', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -29,8 +28,8 @@ const Data = () => {
                 key={item.name}
                 href={item.href}
                 className={classNames(
-                  item.current ? 'text-black hover:text-bold' : 'hover:text-black hover:opacity-100',
-                  'py-1 text-lg font-normal opacity-75 block dark:text-black'
+                  item.current ? 'text-black hover:opacity-100' : 'hover:text-black hover:opacity-100',
+                  'py-1 text-lg font-normal opacity-75 block'
                 )}
                 aria-current={item.current ? 'page' : undefined}
               >
@@ -38,6 +37,7 @@ const Data = () => {
               </Link>
             ))}
             <div className="mt-4"></div>
+          
            
           </div>
         </div>

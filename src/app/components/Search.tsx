@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { formUrl, removeKeysFromQuery } from '@/lib/utils';
-import { useTheme } from './Providers/ThemeContext';
+
 
 type Props = {
   route: string;
@@ -19,7 +19,7 @@ const Search = ({
   placeholder,
   otherClasses,
 }: Props) => {
-    const {mode} = useTheme()
+  
   
   const router = useRouter();
   const pathname = usePathname();
@@ -55,15 +55,13 @@ const Search = ({
 
    
       <div
-        className={`relative flex items-center border rounded-md px-4 py-2 mb-10 ${
-          mode === 'light' ? 'bg-white' : 'bg-gray-800'
-        } ${otherClasses}`}
+        className={`relative flex items-center border rounded-md px-4 py-2 mb-10 ${otherClasses}`}
         style={{ width: '300px' }}
       >
         {iconPosition === 'left' && (
           <div className="mr-2">
             <Image
-              src={mode === 'light' ? '/search.svg' : '/search-white.png'}
+              src="/search.svg"
               alt="Search icon"
               width={20}
               height={20}

@@ -24,7 +24,7 @@ const postData: any = [
         heading2: 'Mains and Advanced',
         name: "Coming Soon",
         imgSrc: '/assets/courses/jee.jpg',
-        students: 150,
+        students: 25,
         classes: 12,
     },
     {

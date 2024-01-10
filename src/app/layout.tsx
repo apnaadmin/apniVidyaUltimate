@@ -1,5 +1,5 @@
 import './globals.css';
-import ThemeProvider from './components/Providers/ThemeContext';
+
 import Navbar from './components/Navbar/index';
 import Footer from './components/Footer/Footer';
 import { EdgeStoreProvider } from '../lib/edgestore';
@@ -20,16 +20,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
         <head />
         
-        <body className={`flex flex-col items-center justify-center bg-white dark:bg-black `} >
+        <body className={`bg-white dark:bg-black flex flex-col `} >
         <Providers>
           <EdgeStoreProvider>
-          <ThemeProvider
-          >
+          <div>
               <Navbar />
+              
         {children}
-       
+        </div>
+       <div></div>
         <Footer />
-          </ThemeProvider>
+         
           </EdgeStoreProvider>
       
           </Providers>
