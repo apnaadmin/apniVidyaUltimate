@@ -38,7 +38,7 @@ const Newsletter = () => {
                         ></path>
                       </svg>
                     </div>
-                    Email us at support@apnividya.in
+                    <span>Email us at support@apnividya.in</span>
                   </div>
                 </h2>
               </div>
