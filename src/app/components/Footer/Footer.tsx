@@ -14,7 +14,7 @@ interface socialLinks {
 }
 
 
-const products: any = [
+const products: ProductType[] = [
     {
         id: 1,
         section: "Company",
@@ -74,7 +74,7 @@ const footer = () => {
                 {/* CLOUMN-2/3/4 */}
 
 
-                {products.map((product:any) => (
+                {products.map((product) => (
                     <div key={product.id} className="sm:col-span-2">
                         <p className="text-black text-lg font-medium mb-9">{product.section}</p>
                         <ul>

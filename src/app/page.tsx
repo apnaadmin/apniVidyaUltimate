@@ -9,24 +9,21 @@ import Newsletter from './components/Newsletter/Newsletter';
 export default function Home() {
   return (
     <main>
-      <div id="Banner">
+     
       <Banner />
-      </div>
-      <div id="Companies">
+     
+     
       <Companies />
-      </div >
-      <div id="Courses">
+     
+     
       <Courses />
-      </div>
-      <div id="Mentor">
+ 
       <Mentor />
-      </div >
-      <div id="Testimonial">
-      <Testimonials />
-      </div>
-      <div id="Newsletter">
-      <Newsletter />
-      </div>
+    
+     
+     
+ 
+     
     </main>
   )
 }

@@ -6,8 +6,7 @@ import Drawer from "./Drawer";
 import Drawerdata from "./Drawerdata";
 import Signdialog from "./Signdialog";
 import Registerdialog from "./Registerdialog";
-import Image from 'next/image';
-import Theme from '../Theme';
+
 interface NavigationItem {
     name: string;
     href: string;
@@ -16,38 +15,26 @@ interface NavigationItem {
 
 const navigation: NavigationItem[] = [
     { name: 'Home', href: '/', current: true },
-    // { name: 'Courses', href: '#courses', current: false },
+    { name: 'Register', href: '/Register', current: false },
     { name: 'ViewTeachers', href: '/ViewTeachers', current: false },
-    { name: 'Register', href:'/Register', current: false },
-    // { name: 'Testimonial', href: '#testimonial', current: false },
+   
 ];
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
 }
-const CustomLink = ({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) => {
-    // Check if the link is an anchor link (starts with '#') or an external link
-    const isInternalLink = href.startsWith('/') || href.startsWith('#');
 
-    if (isInternalLink) {
-        return (
-            <Link href={href} passHref>
-                <span
-                    onClick={onClick}
-                    className="px-3 py-4 text-lg font-normal cursor-pointer"
-                >
-                    {children}
-                </span>
-            </Link>
-        );
-    } else {
-        // External link, use a regular anchor tag
-        return (
-            <a href={href} target="_blank" rel="noopener noreferrer" className="px-3 py-4 text-lg font-normal cursor-pointer">
+const CustomLink = ({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) => {
+    return (
+        <Link href={href} passHref>
+            <span
+                onClick={onClick}
+                className="px-3 py-4 text-lg font-normal"
+            >
                 {children}
-            </a>
-        );
-    }
+            </span>
+        </Link>
+    );
 };
 
 
@@ -63,7 +50,7 @@ const Navbar = () => {
     return (
         <Disclosure as="nav" className="navbar">
             <>
-                <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8 mb-20 ">
+                <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
                     <div className="relative flex h-12 md:h-20 items-center justify-between">
                         <div className="flex flex-1 items-center sm:items-stretch sm:justify-start">
 
@@ -71,7 +58,7 @@ const Navbar = () => {
 
                             <div className="flex items-center">
                                 
-                              <Image src="/_next/image?url=%2Fassets%2Fapnividyalogo2.png&w=156&q=100" alt="ApniVisdya" height={150} width={300}/>
+                              <img src="/_next/image?url=%2Fassets%2Fapnividyalogo2.png&w=256&q=100"></img>
                             </div>
 
                             {/* LINKS */}
@@ -94,9 +81,7 @@ const Navbar = () => {
                                                 {item.name}
                                             </span>
                                         </CustomLink>
-
                                     ))}
-                                    <Theme/>
                                 </div>
                             </div>
                         </div>
