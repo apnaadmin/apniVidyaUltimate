@@ -1,5 +1,5 @@
 import Image from 'next/image';
-
+import Link from 'next/link';
 const Banner = () => {
 
     return (
@@ -50,6 +50,17 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
+            <div className="mt-10 mb-10 py-10 sm:py-24" id="mentor">
+  <div className="min-w-full h-6 flex justify-center items-center">
+    <Link
+      className="lg:py-10 lg:px-16 lg:text-2xl text-xl text-white hover:bg-Blueviolet hover:shadow-2xl text-blue-700 font-semibold hover:text-white py-5 px-8 border border-blue-500 hover:border-transparent rounded-3xl"
+      href="/ViewTeachers"
+      style={{ backgroundColor: 'blue', color: 'white' }}
+    >
+      View all teachers
+    </Link>
+  </div>
+</div>
 
         </div>
 

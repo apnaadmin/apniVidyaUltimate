@@ -5,7 +5,6 @@ import Mentor from './components/Mentor/index';
 import Testimonials from './components/Testimonials/index';
 import Newsletter from './components/Newsletter/Newsletter';
 
-
 export default function Home() {
   return (
     <main>
@@ -19,6 +18,7 @@ export default function Home() {
       <Courses />
  
       <Mentor />
+      <Newsletter/>
     
      
      
