@@ -7,7 +7,7 @@ const Newsletter = () => {
       <div className="mx-6 max-w-2xl md:max-w-7xl my-8">
         <div className="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-cols-12 xl:gap-x-8">
           <div className="col-span-12 bg-gradient-to-r from-blue-500 to-sky-500 rounded-3xl">
-            <div className="mb-10 mt-24 lg:mx-64 lg:my-24">
+            <div className="mb-10 mt-24 lg:mx-64 lg:my-24 p-6">
               <h3 className="text-4xl md:text-55xl text-center font-semibold text-white mb-3">
                 Contact Us.
               </h3>
@@ -18,8 +18,8 @@ const Newsletter = () => {
 
               <div className="mx-5">
                 <h2 className="py-6 lg:py-5 text-sm md:text-lg w-full mx-1 text-black rounded-full pl-1 focus:outline-none focus:text-black bg-white text-center">
-                  <div className="flex items-center justify-center">
-                    <div className="bg-black rounded-full p-2 mr-2 ml-3">
+                  <div className="flex items-center justify-center pr-3">
+                    <div className="bg-black rounded-full mr-2 ml-3">
                       <svg
                         stroke="currentColor"
                         fill="none"
