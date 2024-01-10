@@ -71,7 +71,7 @@ const Navbar = () => {
 
                             <div className="flex items-center">
                                 
-                              <Image src="/_next/image?url=%2Fassets%2Fapnividyalogo2.png&w=256&q=100" alt="ApniVisdya" height={150} width={300}/>
+                              <Image src="/_next/image?url=%2Fassets%2Fapnividyalogo2.png&w=156&q=100" alt="ApniVisdya" height={150} width={300}/>
                             </div>
 
                             {/* LINKS */}
