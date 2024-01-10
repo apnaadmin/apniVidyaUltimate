@@ -29,7 +29,7 @@ import {
   SelectValue,
 } from "shad/select"
 
-const route = process.env.NEXT_PUBLIC_URL
+const route = "https://apnividya-five.vercel.app"
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -95,6 +95,7 @@ export default function TeacherForm() {
             // image: logoBase64,
             handler: async function (response: any) {
               console.log(response);
+              
               
               const data = await fetch(`${route}/api/paymentverify`, {
                 method: "POST",
