@@ -13,7 +13,7 @@ interface DataType {
     name: string;
 }
 
-const postData: DataType[] = [
+const postData: any= [
     {
         name: "Swami Vivekananda",
         // profession: 'CEO, Parkview Int.Ltd',
