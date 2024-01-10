@@ -29,7 +29,7 @@ import {
   SelectValue,
 } from "shad/select"
 
-const route = "https://apnividya-3p2v5k1r0-apnavidyas-projects.vercel.app"
+const route = "https://apnividya-five.vercel.app"
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
