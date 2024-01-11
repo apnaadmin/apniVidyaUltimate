@@ -411,7 +411,7 @@ export default function TeacherForm() {
 <Button className="z-50 bg-yellow-500 ml-2 mr-6 " type="button" onClick={makePayment}>Pay Rs.49 </Button>
 <Button disabled={isLoading || !isAuthentic} type="submit" className="bg-red-500">Register</Button>
 
-      
+    
     </form>
   </Form>
  

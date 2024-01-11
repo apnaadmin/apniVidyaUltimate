@@ -13,10 +13,7 @@ export default function Home() {
      
      
       <Companies />
-     
-     
-      <Courses />
- 
+          <Courses />
       <Mentor />
       <Newsletter/>
     
