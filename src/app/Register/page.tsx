@@ -1,16 +1,16 @@
-"use client"
-import { useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { Textarea } from "shad/textarea"
-import { Button } from "shad/button"
-import { createUser } from "@/src/actions/user.action"
-import { useRouter,usePathname } from 'next/navigation'
-import { useEdgeStore } from "@/src/lib/edgestore"
-import MakePaymentComponent from '@/src/app/components/MakePayment'
-import Script from "next/script"
-import {Loader} from '@/src/app/components/Loader'
+"use client";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Textarea } from "shad/textarea";
+import { Button } from "shad/button";
+import { createUser } from "@/src/actions/user.action";
+import { useRouter, usePathname } from "next/navigation";
+import { useEdgeStore } from "@/src/lib/edgestore";
+import MakePaymentComponent from "@/src/app/components/MakePayment";
+import Script from "next/script";
+import { Loader } from "@/src/app/components/Loader";
 import {
   Form,
   FormControl,
@@ -19,42 +19,44 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "shad/form"
-import { Input } from "shad/input"
+} from "shad/form";
+import { Input } from "shad/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "shad/select"
+} from "shad/select";
 
-const route = "https://apnividya-five.vercel.app"
+const route = "http://localhost:3000";
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-  bio:z.string().min(10, {
+  bio: z.string().min(10, {
     message: "Bio must be atleast 10 words",
   }),
-  experience:z.string(),
-  location:z.string(),
-  mode:z.string(),
-  state:z.string(),
+  experience: z.string(),
+  location: z.string(),
+  mode: z.string(),
+  state: z.string(),
   email: z.string().email({
     message: "Invalid email address",
   }),
-  number:z.string().min(2, {
-    message: "Phone number must consist of atleast 10 digits",
-  }).max(10, {
-    message: "Phone number cannot exceed 10 digits",
-  }),
+  number: z
+    .string()
+    .min(2, {
+      message: "Phone number must consist of atleast 10 digits",
+    })
+    .max(10, {
+      message: "Phone number cannot exceed 10 digits",
+    }),
   subject: z.string(),
-  pic:z.string(),
-})
+  pic: z.string(),
+});
 
 export default function TeacherForm() {
-
   const [isAuthentic, setIsAuthentic] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -108,7 +110,7 @@ export default function TeacherForm() {
                   razorpay_signature: response.razorpay_signature,
                 }),
               });
-      //dd
+      
               const res = await data.json();
       
               console.log("response verify==", res);
@@ -118,161 +120,157 @@ export default function TeacherForm() {
                 console.log("ok");
               }},
 
-              prefill: {
-                name: "apnividya",
-                email: "apni@gmail.com",
-                contact: "000000000",
-              },
-
-              
-            
-          };
-          const paymentObject = new window.Razorpay(options);
-          paymentObject.open();
-      
-          paymentObject.on("payment.failed", function (response:any) {
-            alert("Payment failed. Please try again. Contact support for help");
-          });
-          
-        } catch (error) {
-          console.log(error);
-        }
+        prefill: {
+          name: "apnividya",
+          email: "apni@gmail.com",
+          contact: "000000000",
+        },
       };
-      
-      const onSubmit = async (data: any) => {
-        try {
-        setIsLoading(true)
-          const formData = new FormData();
-          Object.keys(data).forEach((key) => {
-            formData.append(key, data[key]);
-          });
-      
-          const file = (document.getElementById('picture') as HTMLInputElement)?.files?.[0];
-          if (file) {
-            const res = await edgestore.edgestore.myImages.upload({ file });
-            console.log(res.url);
-            console.log(res.thumbnailUrl);
-            const picture = await res.url;
-            const updatedData = { ...data, pic: picture };
-            const { name, bio, location, email, subject, experience, number, pic } = updatedData;
-            await createUser({
-              bio,
-              email,
-              experience,
-              location,
-              name,
-              number,
-              pic,
-              subject,
-              path
-            });
-            router.push("/ViewTeachers")
-          }
-        } catch (error) {
-          console.error(error);
-        }
-        finally
-        {
-          setIsLoading(false)
-        }
-      };
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
 
+      paymentObject.on("payment.failed", function (response: any) {
+        alert("Payment failed. Please try again. Contact support for help");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-      
+  const onSubmit = async (data: any) => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
+
+      const file = (document.getElementById("picture") as HTMLInputElement)
+        ?.files?.[0];
+      if (file) {
+        const res = await edgestore.edgestore.myImages.upload({ file });
+        console.log(res.url);
+        console.log(res.thumbnailUrl);
+        const picture = await res.url;
+        const updatedData = { ...data, pic: picture };
+        const { name, bio, location, email, subject, experience, number, pic } =
+          updatedData;
+        await createUser({
+          bio,
+          email,
+          experience,
+          location,
+          name,
+          number,
+          pic,
+          subject,
+          path,
+        });
+        router.push("/ViewTeachers");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
-    
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 mt-10"
+        >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Display Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your display name" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your public display name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-    <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-10" >
-      <FormField
-        control={form.control}
-        name="name"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Display Name</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter your display name" {...field} />
-            </FormControl>
-            <FormDescription>
-              This is your public display name.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+          <FormField
+            control={form.control}
+            name="bio"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Bio</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder=" Write what you want students to see"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <FormField
-        control={form.control}
-        name="bio"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Bio</FormLabel>
-            <FormControl>
-            <Textarea
-                  placeholder=" Write what you want students to see"
-                  className="resize-none"
-                  {...field}
-                />
-            </FormControl>
-            <FormDescription>
-             
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+          <FormField
+            control={form.control}
+            name="experience"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Qualifications</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your qualifications" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Enter your qualifications in the format (e.g., B.A English
+                  Hons., 2 Years Experience).
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <FormField
-        control={form.control}
-        name="experience"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Qualifications</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter your qualifications" {...field} />
-            </FormControl>
-            <FormDescription>
-              Enter your qualifications in the format (e.g., B.A English Hons., 2 Years Experience).
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Location</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your location" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Specify the location where you want to teach. Include this in
+                  the description box for SEO.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <FormField
-        control={form.control}
-        name="location"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Location</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter your location" {...field} />
-            </FormControl>
-            <FormDescription>
-              Specify the location where you want to teach. Include this in the description box for SEO.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="number"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Mobile Number</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter your mobile number" {...field} />
-            </FormControl>
-            <FormDescription>
-              Provide your mobile number. Note that this will be publicly visible on the website for students to contact you.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+          <FormField
+            control={form.control}
+            name="number"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mobile Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your mobile number" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Provide your mobile number. Note that this will be publicly
+                  visible on the website for students to contact you.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
       <FormField
         control={form.control}
@@ -411,7 +409,7 @@ export default function TeacherForm() {
 <Button className="z-50 bg-yellow-500 ml-2 mr-6 " type="button" onClick={makePayment}>Pay Rs.49 </Button>
 <Button disabled={isLoading || !isAuthentic} type="submit" className="bg-red-500">Register</Button>
 
-    
+      
     </form>
   </Form>
  
