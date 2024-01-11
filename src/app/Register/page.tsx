@@ -108,7 +108,7 @@ export default function TeacherForm() {
                   razorpay_signature: response.razorpay_signature,
                 }),
               });
-      
+      //eee
               const res = await data.json();
       
               console.log("response verify==", res);
